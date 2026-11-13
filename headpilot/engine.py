@@ -1,7 +1,7 @@
 """Moteur de HeadPilot : caméra → visage → gestes → souris.
 
 Tourne sur son propre fil. L'interface lit l'état via le Bridge et envoie des demandes
-(pause, recentrer, clavier visuel, réglages) via request().
+(pause, recentrer, clavier, réglages) via request().
 """
 import math
 import sys
@@ -36,10 +36,11 @@ def open_camera(index: int):
 
 
 class Engine:
-    def __init__(self, cfg: Config, bridge=None, overlay=None):
+    def __init__(self, cfg: Config, bridge=None, overlay=None, keyboard=None):
         self.cfg = cfg
         self.bridge = bridge
         self.overlay = overlay
+        self.keyboard = keyboard  # clavier HeadPilot (None : clavier visuel de Windows)
         self.mapper = PointerMapper()
         self.dwell = DwellClicker()
         self.gestures = GestureDetector(GestureSettings())
@@ -139,8 +140,7 @@ class Engine:
         if self._take("recenter"):
             self._start_calibration(now)
         if self._take("keyboard"):
-            mouse.open_onscreen_keyboard()
-            self._say("Clavier visuel ouvert.", "Clavier visuel ouvert", "accent")
+            self._toggle_keyboard()
 
         was_closed, was_brow = self.gestures.eyes_closed, self.gestures.brow_active
         events = self.gestures.update(now, reading.signals if reading else None)
@@ -195,7 +195,9 @@ class Engine:
 
         progress = 0.0
         if self.cfg.dwell_click and not freeze:
-            st = self.dwell.update(now, *mouse.position())
+            x, y = mouse.position()
+            on_keys = self.keyboard is not None and self.keyboard.contains(x, y)
+            st = self.dwell.update(now, x, y, repeat=on_keys)
             progress = st.progress
             if st.fired:
                 self._click("left", "Clic (immobilité)", use_gesture_pos=False)
@@ -209,12 +211,22 @@ class Engine:
             self._last_set = self._gesture_start_pos
         mouse.click(button)
         self._gesture_start_pos = None
-        self.dwell.reset()
+        self.dwell.hold(*mouse.position())  # pas de second clic sur place par immobilité
         if self.overlay is not None:
             self.overlay.flash()
         if self.cfg.click_sound:
             _tick(button)
         self._log(label, "green")
+
+    def _toggle_keyboard(self):
+        if self.keyboard is None:
+            mouse.open_onscreen_keyboard()
+            self._say("Clavier visuel ouvert.", "Clavier visuel de Windows ouvert", "accent")
+        elif self.keyboard.toggle():
+            self._say("Clavier affiché. Clique d'abord dans le texte où écrire.",
+                      "Clavier affiché : clique d'abord dans le texte où écrire", "accent")
+        else:
+            self._say("Clavier masqué.", "Clavier masqué", "grey")
 
     def _scroll(self, now: float, reading):
         center_pitch = self.mapper.center[1]

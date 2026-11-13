@@ -72,10 +72,18 @@ class DwellClicker:
         self._armed = True
         self._last_click: tuple[float, float] | None = None
 
-    def update(self, t: float, x: float, y: float) -> DwellState:
+    def hold(self, x: float, y: float):
+        """Un clic vient d'avoir lieu ici (geste ou immobilité) : pas de nouveau clic sur place."""
+        self._anchor = None
+        self._armed = False
+        self._last_click = (x, y)
+
+    def update(self, t: float, x: float, y: float, repeat: bool = False) -> DwellState:
+        """repeat=True (sur le clavier) : rester immobile retape la touche après un nouveau délai."""
         if self._anchor is None or math.dist(self._anchor, (x, y)) > self.radius_px:
             self._anchor, self._since = (x, y), t
-        if not self._armed and (self._last_click is None or math.dist(self._last_click, (x, y)) > self.rearm_px):
+        if not self._armed and (repeat or self._last_click is None
+                                or math.dist(self._last_click, (x, y)) > self.rearm_px):
             self._armed = True
             self._anchor, self._since = (x, y), t
         if not self._armed:

@@ -14,7 +14,18 @@
 | **Lever les sourcils** | Clic droit |
 | **Ouvrir la bouche**, puis lever ou baisser la tête | Défilement (molette) |
 | **Fermer les yeux 2,5 s** | Pause, puis reprise, sans les mains |
-| Bouton **Clavier** | Ouvre le clavier visuel de Windows, utilisable avec le clic par immobilité |
+| Bouton **Clavier** | Affiche le clavier HeadPilot (voir ci-dessous) |
+
+## Écrire avec la tête : le clavier HeadPilot
+
+1. **Clique d'abord dans le texte où écrire** (Word, Bloc-notes, navigateur…), par clignement ou immobilité.
+2. Affiche le clavier (bouton **Clavier**). Son bandeau indique **où le texte va s'écrire**.
+3. Pointe une touche et **reste immobile** (ou cligne longuement) : la lettre est tapée.
+   Rester sur la même touche la **retape** après un nouveau délai : pratique pour « ll », « ss ».
+
+- Grandes touches AZERTY, accents en accès direct (é è à ç, ê ù en mode 123), **⇧** majuscule, **Entrée**, **⌫** effacer, flèches **← →**, **123** chiffres et symboles.
+- **⇅** passe le clavier en haut ou en bas de l'écran ; **✕** le masque.
+- Le clavier **ne prend jamais le focus** : le texte arrive dans ta fenêtre, et non dans HeadPilot. Le clavier visuel de Windows (osk.exe), lui, ignore souvent les clics simulés : c'est pourquoi HeadPilot a le sien.
 
 **Pour l'aidant :**
 - **Ctrl + Alt + P** met en pause ou reprend, même hors de la fenêtre.
@@ -57,7 +68,9 @@ headpilot/
   pointer.py   tête → position du curseur, clic par immobilité (logique pure, testée)
   filters.py   filtre One Euro
   engine.py    boucle principale : caméra → gestes → souris
-  mouse.py     souris Windows, clavier visuel
+  mouse.py     souris et frappes clavier Windows (SendInput)
+  keyboard.py  clavier HeadPilot (fenêtre qui ne prend jamais le focus)
+  keyboard_layout.py  disposition des touches (logique pure, testée)
   overlay.py   anneau transparent autour du curseur
   hotkey.py    raccourci Ctrl+Alt+P
   config.py    réglages enregistrés
@@ -67,3 +80,16 @@ tests/         tests de la logique
 ```
 
 Tests : `python -m unittest`
+
+Ce que fera la version de ce soir :
+
+La souris suit la tête : la position du nez par rapport aux yeux donne la direction, et un filtre anti-tremblement rend le curseur précis.
+Clic gauche : un clignement long (environ une demi-seconde). Les clignements naturels, plus courts, sont ignorés.
+Clic par immobilité : garder le curseur immobile une seconde clique. C'est le mode standard des logiciels d'accessibilité, avec un anneau de progression autour du curseur.
+Clic droit : lever les sourcils.
+Défilement : ouvrir la bouche, puis lever ou baisser la tête.
+Pause et reprise sans les mains : fermer les yeux 2,5 secondes.
+Recentrage : un bouton, ou automatique au démarrage.
+Clavier visuel de Windows : un bouton, pour écrire avec la tête.
+Sécurité : si quelqu'un touche la vraie souris, le contrôle par la tête s'efface aussitôt.
+Panneau de contrôle dans le style de Posture Coach : vidéo, jauges des gestes, réglages de sensibilité.

@@ -142,11 +142,10 @@ class CursorOverlay:
                 _user32.GetCursorPos(ctypes.byref(pt))
                 key = (round(progress, 2), mode, round(flash, 2))
                 if key != last_key:
-                    self._blit(hwnd, render(progress, mode, flash), pt.x - SIZE // 2, pt.y - SIZE // 2)
+                    blit(hwnd, render(progress, mode, flash), pt.x - SIZE // 2, pt.y - SIZE // 2)
                     last_key = key
-                else:
-                    _user32.SetWindowPos(hwnd, wt.HWND(-1), pt.x - SIZE // 2, pt.y - SIZE // 2, 0, 0,
-                                         0x0001 | 0x0010)  # SWP_NOSIZE | SWP_NOACTIVATE, toujours au-dessus
+                # toujours au-dessus, même du clavier HeadPilot (SWP_NOSIZE | SWP_NOACTIVATE)
+                _user32.SetWindowPos(hwnd, wt.HWND(-1), pt.x - SIZE // 2, pt.y - SIZE // 2, 0, 0, 0x0001 | 0x0010)
                 if not visible:
                     _user32.ShowWindow(hwnd, SW_SHOWNOACTIVATE)
                     visible = True
@@ -156,28 +155,28 @@ class CursorOverlay:
             time.sleep(1 / 60)
         _user32.DestroyWindow(hwnd)
 
-    @staticmethod
-    def _blit(hwnd, img: Image.Image, x: int, y: int):
-        """Envoie l'image RGBA (alpha prémultiplié, ordre BGRA) à la fenêtre superposée."""
-        arr = np.asarray(img, dtype=np.float32)
-        alpha = arr[:, :, 3:4] / 255.0
-        bgra = np.concatenate([arr[:, :, 2::-1] * alpha, arr[:, :, 3:4]], axis=2).astype(np.uint8)
-        data = np.ascontiguousarray(bgra).tobytes()
 
-        screen_dc = _user32.GetDC(None)
-        mem_dc = _gdi32.CreateCompatibleDC(screen_dc)
-        bmi = BITMAPINFOHEADER(biSize=ctypes.sizeof(BITMAPINFOHEADER), biWidth=SIZE, biHeight=-SIZE,
-                               biPlanes=1, biBitCount=32, biCompression=0)
-        bits = ctypes.c_void_p()
-        hbmp = _gdi32.CreateDIBSection(mem_dc, ctypes.byref(bmi), 0, ctypes.byref(bits), None, 0)
-        ctypes.memmove(bits, data, len(data))
-        old = _gdi32.SelectObject(mem_dc, hbmp)
-        pos, size, src = wt.POINT(x, y), wt.SIZE(SIZE, SIZE), wt.POINT(0, 0)
-        blend = BLENDFUNCTION(0, 0, 255, AC_SRC_ALPHA)
-        _user32.UpdateLayeredWindow(hwnd, screen_dc, ctypes.byref(pos), ctypes.byref(size), mem_dc,
-                                    ctypes.byref(src), 0, ctypes.byref(blend), ULW_ALPHA)
-        _gdi32.SelectObject(mem_dc, old)
-        _gdi32.DeleteObject(hbmp)
-        _gdi32.DeleteDC(mem_dc)
-        _user32.ReleaseDC(None, screen_dc)
+def blit(hwnd, img: Image.Image, x: int, y: int):
+    """Envoie une image RGBA (alpha prémultiplié, ordre BGRA) à une fenêtre superposée."""
+    w, h = img.size
+    arr = np.asarray(img, dtype=np.float32)
+    alpha = arr[:, :, 3:4] / 255.0
+    bgra = np.concatenate([arr[:, :, 2::-1] * alpha, arr[:, :, 3:4]], axis=2).astype(np.uint8)
+    data = np.ascontiguousarray(bgra).tobytes()
 
+    screen_dc = _user32.GetDC(None)
+    mem_dc = _gdi32.CreateCompatibleDC(screen_dc)
+    bmi = BITMAPINFOHEADER(biSize=ctypes.sizeof(BITMAPINFOHEADER), biWidth=w, biHeight=-h,
+                           biPlanes=1, biBitCount=32, biCompression=0)
+    bits = ctypes.c_void_p()
+    hbmp = _gdi32.CreateDIBSection(mem_dc, ctypes.byref(bmi), 0, ctypes.byref(bits), None, 0)
+    ctypes.memmove(bits, data, len(data))
+    old = _gdi32.SelectObject(mem_dc, hbmp)
+    pos, size, src = wt.POINT(x, y), wt.SIZE(w, h), wt.POINT(0, 0)
+    blend = BLENDFUNCTION(0, 0, 255, AC_SRC_ALPHA)
+    _user32.UpdateLayeredWindow(hwnd, screen_dc, ctypes.byref(pos), ctypes.byref(size), mem_dc,
+                                ctypes.byref(src), 0, ctypes.byref(blend), ULW_ALPHA)
+    _gdi32.SelectObject(mem_dc, old)
+    _gdi32.DeleteObject(hbmp)
+    _gdi32.DeleteDC(mem_dc)
+    _user32.ReleaseDC(None, screen_dc)

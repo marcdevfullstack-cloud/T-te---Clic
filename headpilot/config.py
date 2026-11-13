@@ -6,7 +6,7 @@ from dataclasses import asdict, dataclass, field, fields
 from pathlib import Path
 
 APP_NAME = "HeadPilot"
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 AUTHOR = "MarcDev@"
 CONTACT_EMAIL = "marcdevfullstack@gmail.com"
 

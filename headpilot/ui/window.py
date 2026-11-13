@@ -41,12 +41,14 @@ class Api:
 
 def run_app(cfg: Config):
     from ..hotkey import GlobalHotkey
+    from ..keyboard import VirtualKeyboard
     from ..overlay import CursorOverlay
     from .bridge import Bridge
 
     bridge = Bridge()
     overlay = CursorOverlay()
-    engine = Engine(cfg, bridge=bridge, overlay=overlay)
+    keyboard = VirtualKeyboard()
+    engine = Engine(cfg, bridge=bridge, overlay=overlay, keyboard=keyboard)
     hotkey = GlobalHotkey(lambda: engine.request("pause"))
     api = Api(engine, bridge)
 
@@ -63,6 +65,7 @@ def run_app(cfg: Config):
     def on_closed():
         engine.quit.set()
         overlay.close()
+        keyboard.close()
         hotkey.close()
         bridge.close()
 

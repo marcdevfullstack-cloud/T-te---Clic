@@ -73,6 +73,60 @@ def scroll(notches: float):
         ctypes.windll.user32.mouse_event(_WHEEL, 0, 0, int(notches * 120), 0)
 
 
+# --- Clavier : vraies frappes envoyées à la fenêtre active (SendInput) ---------------
+
+_KEYEVENTF_KEYUP, _KEYEVENTF_UNICODE = 0x0002, 0x0004
+
+
+class _KeybdInput(ctypes.Structure):
+    _fields_ = [("wVk", ctypes.c_ushort), ("wScan", ctypes.c_ushort), ("dwFlags", ctypes.c_ulong),
+                ("time", ctypes.c_ulong), ("dwExtraInfo", ctypes.c_size_t)]
+
+
+class _MouseInput(ctypes.Structure):  # présent seulement pour donner sa taille à l'union
+    _fields_ = [("dx", ctypes.c_long), ("dy", ctypes.c_long), ("mouseData", ctypes.c_ulong),
+                ("dwFlags", ctypes.c_ulong), ("time", ctypes.c_ulong), ("dwExtraInfo", ctypes.c_size_t)]
+
+
+class _InputUnion(ctypes.Union):
+    _fields_ = [("ki", _KeybdInput), ("mi", _MouseInput)]
+
+
+class _Input(ctypes.Structure):
+    _fields_ = [("type", ctypes.c_ulong), ("u", _InputUnion)]
+
+
+def _send(events: list[tuple[int, int, int]]):
+    """events : (vk, scan, flags) envoyés d'un seul bloc."""
+    if not IS_WINDOWS or not events:
+        return
+    arr = (_Input * len(events))()
+    for i, (vk, scan, flags) in enumerate(events):
+        arr[i].type = 1  # INPUT_KEYBOARD
+        arr[i].u.ki = _KeybdInput(vk, scan, flags, 0, 0)
+    ctypes.windll.user32.SendInput(len(events), arr, ctypes.sizeof(_Input))
+
+
+def type_text(text: str):
+    """Tape du texte Unicode (accents, €…), quelle que soit la disposition du clavier."""
+    events = []
+    for ch in text:
+        for unit in _utf16_units(ch):
+            events += [(0, unit, _KEYEVENTF_UNICODE), (0, unit, _KEYEVENTF_UNICODE | _KEYEVENTF_KEYUP)]
+    _send(events)
+
+
+def press_key(vk: int):
+    """Touche spéciale : Entrée, Retour arrière, Tab, flèches…"""
+    ext = 0x0001 if 0x21 <= vk <= 0x2E else 0  # flèches & co : touches « étendues »
+    _send([(vk, 0, ext), (vk, 0, ext | _KEYEVENTF_KEYUP)])
+
+
+def _utf16_units(ch: str) -> list[int]:
+    data = ch.encode("utf-16-le")
+    return [int.from_bytes(data[i:i + 2], "little") for i in range(0, len(data), 2)]
+
+
 def open_onscreen_keyboard():
     """Clavier visuel de Windows (osk.exe), utilisable avec le clic par immobilité."""
     if IS_WINDOWS:
