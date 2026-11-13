@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeadPilot</title>
+<link rel="stylesheet" href="panel.css">
+</head>
+<body class="booting">
+<div class="splash"><div class="splash-logo" data-icon="logo"></div><div class="splash-name">HeadPilot</div><div class="splash-by">par MarcDev@</div></div>
+
+<main id="app">
+  <header class="head">
+    <div class="brand"><span class="logo" data-icon="logo"></span><div><b>HeadPilot</b><small>La souris au bout du regard</small></div></div>
+    <div class="status" id="status"><span class="dot"></span><span id="status-text">Démarrage</span></div>
+  </header>
+
+  <section class="hero card" id="hero">
+    <img id="video" alt="" hidden>
+    <div class="ph" id="ph"><div class="ph-icon" data-icon="face"></div><b id="ph-title">Démarrage de la caméra…</b><small id="ph-text"></small></div>
+    <div class="calib" id="calib" hidden>
+      <div class="calib-ring"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" class="trk"/><circle cx="32" cy="32" r="27" class="bar" id="calib-bar"/></svg><span id="calib-num">2</span></div>
+      <b>Regarde le centre de l'écran</b><small>sans bouger la tête</small>
+    </div>
+    <div class="fps" id="fps"></div>
+  </section>
+
+  <section class="actions">
+    <button class="big primary" id="btn-pause" data-action="pause"><span data-icon="pause"></span><span class="lbl">Pause</span></button>
+    <button class="big" data-action="recenter"><span data-icon="target"></span>Recentrer</button>
+    <button class="big" data-action="keyboard"><span data-icon="keyboard"></span>Clavier</button>
+  </section>
+
+  <section class="card">
+    <h2><span data-icon="sparkles"></span>Gestes</h2>
+    <div class="gesture" id="g-blink">
+      <div class="g-top"><div><b>Clignement long</b><small>clic gauche · yeux fermés 2,5 s = pause</small></div>
+        <label class="switch"><input type="checkbox" data-setting="blink_click"><span></span></label></div>
+      <div class="meter"><i class="fill"></i><i class="mark" style="left:50%"></i></div>
+    </div>
+    <div class="gesture" id="g-brow">
+      <div class="g-top"><div><b>Sourcils levés</b><small>clic droit</small></div>
+        <label class="switch"><input type="checkbox" data-setting="brow_right_click"><span></span></label></div>
+      <div class="meter"><i class="fill"></i><i class="mark" style="left:55%"></i></div>
+    </div>
+    <div class="gesture" id="g-jaw">
+      <div class="g-top"><div><b>Bouche ouverte</b><small>défilement : lève ou baisse la tête</small></div>
+        <label class="switch"><input type="checkbox" data-setting="mouth_scroll"><span></span></label></div>
+      <div class="meter"><i class="fill"></i><i class="mark" style="left:45%"></i></div>
+    </div>
+    <div class="gesture">
+      <div class="g-top"><div><b>Clic par immobilité</b><small>garde le curseur immobile : l'anneau se remplit, puis clic</small></div>
+        <label class="switch"><input type="checkbox" data-setting="dwell_click"><span></span></label></div>
+      <div class="slider"><input type="range" min="0.6" max="2.5" step="0.1" data-setting="dwell_seconds" data-unit=" s"><output></output></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span data-icon="cursor"></span>Pointeur</h2>
+    <div class="row"><span>Sensibilité horizontale</span><div class="slider"><input type="range" min="0.4" max="2.5" step="0.1" data-setting="sensitivity_x" data-unit=" ×"><output></output></div></div>
+    <div class="row"><span>Sensibilité verticale</span><div class="slider"><input type="range" min="0.4" max="2.5" step="0.1" data-setting="sensitivity_y" data-unit=" ×"><output></output></div></div>
+    <div class="row"><span>Stabilité</span><div class="slider"><input type="range" min="0" max="1" step="0.1" data-setting="smoothing" data-unit="" data-pct><output></output></div></div>
+    <div class="toggles">
+      <label class="tg"><input type="checkbox" data-setting="click_sound"><span></span>Son des clics</label>
+      <label class="tg"><input type="checkbox" data-setting="voice"><span></span>Voix</label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span data-icon="list"></span>Activité</h2>
+    <ul class="log" id="log"><li class="empty">Les actions apparaîtront ici.</li></ul>
+  </section>
+
+  <footer class="foot">
+    <div><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>P</kbd> : pause pour l'aidant · toucher la souris reprend la main</div>
+    <div id="about">HeadPilot · © 2026 MarcDev@</div>
+  </footer>
+</main>
+<script src="panel.js"></script>
+</body>
+</html>
