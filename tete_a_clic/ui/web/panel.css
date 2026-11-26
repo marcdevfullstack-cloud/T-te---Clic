@@ -1,4 +1,4 @@
-/* HeadPilot : panneau de contrôle. Thème sombre par défaut, clair si Windows est en clair. */
+/* Tête-à-Clic : panneau de contrôle. Thème sombre par défaut, clair si Windows est en clair. */
 :root {
   --bg-0: #0b0e1a; --bg-1: #121628;
   --surface: rgba(255, 255, 255, 0.055); --surface-2: rgba(255, 255, 255, 0.085);

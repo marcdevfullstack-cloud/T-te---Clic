@@ -1,4 +1,4 @@
-"""Fenêtre de contrôle de HeadPilot (pywebview + Edge WebView2)."""
+"""Fenêtre de contrôle de Tête-à-Clic (pywebview + Edge WebView2)."""
 import threading
 from pathlib import Path
 
@@ -10,7 +10,7 @@ from ..engine import Engine
 
 WEB_DIR = Path(__file__).resolve().parent / "web"
 if not WEB_DIR.exists():  # application installée
-    WEB_DIR = RESOURCE_DIR / "headpilot" / "ui" / "web"
+    WEB_DIR = RESOURCE_DIR / "tete_a_clic" / "ui" / "web"
 
 
 class Api:

@@ -1,4 +1,4 @@
-"""Clavier HeadPilot : grandes touches, toujours au premier plan, qui ne prend JAMAIS le focus.
+"""Clavier Tête-à-Clic : grandes touches, toujours au premier plan, qui ne prend JAMAIS le focus.
 
 Pourquoi pas le clavier visuel de Windows (osk.exe) ? Il ignore souvent les clics simulés
 par un autre programme : le texte n'arrive pas. Ce clavier-ci reçoit les clics (tête ou vraie
@@ -92,10 +92,10 @@ class VirtualKeyboard:
         hinst = _kernel32.GetModuleHandleW(None)
         wc = WNDCLASSEXW(cbSize=ctypes.sizeof(WNDCLASSEXW), lpfnWndProc=self._wndproc, hInstance=hinst,
                          hCursor=_user32.LoadCursorW(None, ctypes.c_void_p(32512)),  # flèche
-                         lpszClassName="HeadPilotKeyboard")
+                         lpszClassName="TeteAClicKeyboard")
         _user32.RegisterClassExW(ctypes.byref(wc))
         ex = WS_EX_LAYERED | WS_EX_TOPMOST | WS_EX_TOOLWINDOW | WS_EX_NOACTIVATE
-        self._hwnd = _user32.CreateWindowExW(ex, "HeadPilotKeyboard", "Clavier HeadPilot", WS_POPUP,
+        self._hwnd = _user32.CreateWindowExW(ex, "TeteAClicKeyboard", "Clavier Tête-à-Clic", WS_POPUP,
                                              0, 0, 10, 10, None, None, hinst, None)
         shown, last_key = False, None
         msg = wt.MSG()
@@ -175,7 +175,7 @@ class VirtualKeyboard:
         title_font = _font("segoeuib.ttf", int(15 * s * k))
         info_font = _font("segoeui.ttf", int(13 * s * k))
         ty = self._pad * k + int(6 * s * k)
-        d.text((self._pad * k + 4 * k, ty), "HeadPilot · clavier", font=title_font, fill=(230, 232, 245))
+        d.text((self._pad * k + 4 * k, ty), "Tête-à-Clic · clavier", font=title_font, fill=(230, 232, 245))
         if warn:
             info, color = "Clique d'abord dans le texte où écrire", (255, 170, 80)
         else:
@@ -243,14 +243,14 @@ class VirtualKeyboard:
         return pid.value
 
     def _track_target(self):
-        """Retient la dernière fenêtre active qui n'est pas HeadPilot : c'est là qu'on écrit."""
+        """Retient la dernière fenêtre active qui n'est pas Tête-à-Clic : c'est là qu'on écrit."""
         fg = _user32.GetForegroundWindow()
         if fg and self._owner_pid(fg) != self._pid:
             self._target = fg
 
     def _focus_target(self) -> bool:
-        """Si HeadPilot a le focus (clic sur son panneau), on le rend à la fenêtre où l'on écrit.
-        Par sécurité, on ne tape rien si le focus reste chez HeadPilot."""
+        """Si Tête-à-Clic a le focus (clic sur son panneau), on le rend à la fenêtre où l'on écrit.
+        Par sécurité, on ne tape rien si le focus reste chez Tête-à-Clic."""
         fg = _user32.GetForegroundWindow()
         if fg and self._owner_pid(fg) != self._pid:
             return True

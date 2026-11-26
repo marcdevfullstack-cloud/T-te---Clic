@@ -1,4 +1,4 @@
-# HeadPilot
+# Tête-à-Clic
 
 *par **MarcDev@** · © 2026 MarcDev@. Tous droits réservés. · Contact : [marcdevfullstack@gmail.com](mailto:marcdevfullstack@gmail.com)*
 
@@ -14,9 +14,9 @@
 | **Lever les sourcils** | Clic droit |
 | **Ouvrir la bouche**, puis lever ou baisser la tête | Défilement (molette) |
 | **Fermer les yeux 2,5 s** | Pause, puis reprise, sans les mains |
-| Bouton **Clavier** | Affiche le clavier HeadPilot (voir ci-dessous) |
+| Bouton **Clavier** | Affiche le clavier Tête-à-Clic (voir ci-dessous) |
 
-## Écrire avec la tête : le clavier HeadPilot
+## Écrire avec la tête : le clavier Tête-à-Clic
 
 1. **Clique d'abord dans le texte où écrire** (Word, Bloc-notes, navigateur…), par clignement ou immobilité.
 2. Affiche le clavier (bouton **Clavier**). Son bandeau indique **où le texte va s'écrire**.
@@ -25,13 +25,13 @@
 
 - Grandes touches AZERTY, accents en accès direct (é è à ç, ê ù en mode 123), **⇧** majuscule, **Entrée**, **⌫** effacer, flèches **← →**, **123** chiffres et symboles.
 - **⇅** passe le clavier en haut ou en bas de l'écran ; **✕** le masque.
-- Le clavier **ne prend jamais le focus** : le texte arrive dans ta fenêtre, et non dans HeadPilot. Le clavier visuel de Windows (osk.exe), lui, ignore souvent les clics simulés : c'est pourquoi HeadPilot a le sien.
+- Le clavier **ne prend jamais le focus** : le texte arrive dans ta fenêtre, et non dans Tête-à-Clic. Le clavier visuel de Windows (osk.exe), lui, ignore souvent les clics simulés : c'est pourquoi Tête-à-Clic a le sien.
 
 **Pour l'aidant :**
 - **Ctrl + Alt + P** met en pause ou reprend, même hors de la fenêtre.
 - **Toucher la vraie souris** suspend aussitôt le contrôle par la tête pendant 2,5 s.
 
-**Précision du clic :** quand on cligne ou qu'on lève les sourcils, la tête bouge souvent un peu. HeadPilot clique donc là où était le curseur **juste avant** le geste.
+**Précision du clic :** quand on cligne ou qu'on lève les sourcils, la tête bouge souvent un peu. Tête-à-Clic clique donc là où était le curseur **juste avant** le geste.
 
 ## Démarrage
 
@@ -62,14 +62,14 @@ Au démarrage, **regarde le centre de l'écran 2 secondes** : c'est le recentrag
 - **Souris** : API Windows via ctypes, en vrais pixels (compatible avec un affichage à 125 % ou 150 %).
 
 ```
-headpilot/
+tete_a_clic/
   tracker.py   visage → orientation de la tête + scores des gestes
   gestures.py  reconnaissance des gestes (logique pure, testée)
   pointer.py   tête → position du curseur, clic par immobilité (logique pure, testée)
   filters.py   filtre One Euro
   engine.py    boucle principale : caméra → gestes → souris
   mouse.py     souris et frappes clavier Windows (SendInput)
-  keyboard.py  clavier HeadPilot (fenêtre qui ne prend jamais le focus)
+  keyboard.py  clavier Tête-à-Clic (fenêtre qui ne prend jamais le focus)
   keyboard_layout.py  disposition des touches (logique pure, testée)
   overlay.py   anneau transparent autour du curseur
   hotkey.py    raccourci Ctrl+Alt+P

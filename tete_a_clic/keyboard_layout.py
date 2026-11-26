@@ -1,4 +1,4 @@
-"""Disposition du clavier HeadPilot (logique pure, testable) : touches, positions, majuscules.
+"""Disposition du clavier Tête-à-Clic (logique pure, testable) : touches, positions, majuscules.
 
 Clavier AZERTY simplifié, à grandes touches, pensé pour le pointage par la tête :
 4 rangées seulement, accents français en accès direct, et un mode « 123 ».

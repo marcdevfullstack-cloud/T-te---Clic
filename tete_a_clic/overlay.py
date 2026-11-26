@@ -122,10 +122,10 @@ class CursorOverlay:
         self._wndproc = WNDPROC(lambda h, m, w, l: _user32.DefWindowProcW(h, m, w, l))
         hinst = _kernel32.GetModuleHandleW(None)
         wc = WNDCLASSEXW(cbSize=ctypes.sizeof(WNDCLASSEXW), lpfnWndProc=self._wndproc,
-                         hInstance=hinst, lpszClassName="HeadPilotCursorRing")
+                         hInstance=hinst, lpszClassName="TeteAClicCursorRing")
         _user32.RegisterClassExW(ctypes.byref(wc))
         ex = WS_EX_LAYERED | WS_EX_TRANSPARENT | WS_EX_TOPMOST | WS_EX_TOOLWINDOW | WS_EX_NOACTIVATE
-        hwnd = _user32.CreateWindowExW(ex, "HeadPilotCursorRing", "HeadPilot", WS_POPUP, 0, 0, SIZE, SIZE,
+        hwnd = _user32.CreateWindowExW(ex, "TeteAClicCursorRing", "Tête-à-Clic", WS_POPUP, 0, 0, SIZE, SIZE,
                                        None, None, hinst, None)
         visible, last_key = False, None
         msg = wt.MSG()
@@ -144,7 +144,7 @@ class CursorOverlay:
                 if key != last_key:
                     blit(hwnd, render(progress, mode, flash), pt.x - SIZE // 2, pt.y - SIZE // 2)
                     last_key = key
-                # toujours au-dessus, même du clavier HeadPilot (SWP_NOSIZE | SWP_NOACTIVATE)
+                # toujours au-dessus, même du clavier Tête-à-Clic (SWP_NOSIZE | SWP_NOACTIVATE)
                 _user32.SetWindowPos(hwnd, wt.HWND(-1), pt.x - SIZE // 2, pt.y - SIZE // 2, 0, 0, 0x0001 | 0x0010)
                 if not visible:
                     _user32.ShowWindow(hwnd, SW_SHOWNOACTIVATE)

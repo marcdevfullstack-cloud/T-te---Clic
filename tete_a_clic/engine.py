@@ -1,4 +1,4 @@
-"""Moteur de HeadPilot : caméra → visage → gestes → souris.
+"""Moteur de Tête-à-Clic : caméra → visage → gestes → souris.
 
 Tourne sur son propre fil. L'interface lit l'état via le Bridge et envoie des demandes
 (pause, recentrer, clavier, réglages) via request().
@@ -40,7 +40,7 @@ class Engine:
         self.cfg = cfg
         self.bridge = bridge
         self.overlay = overlay
-        self.keyboard = keyboard  # clavier HeadPilot (None : clavier visuel de Windows)
+        self.keyboard = keyboard  # clavier Tête-à-Clic (None : clavier visuel de Windows)
         self.mapper = PointerMapper()
         self.dwell = DwellClicker()
         self.gestures = GestureDetector(GestureSettings())

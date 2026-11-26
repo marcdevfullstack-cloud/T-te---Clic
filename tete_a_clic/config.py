@@ -1,11 +1,12 @@
-"""Réglages de HeadPilot, enregistrés automatiquement (settings.json)."""
+"""Réglages de Tête-à-Clic, enregistrés automatiquement (settings.json)."""
 import json
 import os
 import sys
 from dataclasses import asdict, dataclass, field, fields
 from pathlib import Path
 
-APP_NAME = "HeadPilot"
+APP_NAME = "Tête-à-Clic"
+APP_ID = "TeteAClic"  # forme sans accents : dossiers, identifiants techniques
 VERSION = "1.1.0"
 AUTHOR = "MarcDev@"
 CONTACT_EMAIL = "marcdevfullstack@gmail.com"
@@ -17,7 +18,7 @@ RESOURCE_DIR = Path(getattr(sys, "_MEIPASS", PROJECT_DIR))
 
 def default_data_dir() -> Path:
     if FROZEN:
-        return Path(os.environ.get("LOCALAPPDATA", Path.home())) / APP_NAME
+        return Path(os.environ.get("LOCALAPPDATA", Path.home())) / APP_ID
     return PROJECT_DIR / "data"
 
 

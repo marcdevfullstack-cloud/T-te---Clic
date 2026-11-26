@@ -1,4 +1,4 @@
-/* HeadPilot : logique du panneau. État lu 10 fois par seconde via pywebview.api.state(). */
+/* Tête-à-Clic : logique du panneau. État lu 10 fois par seconde via pywebview.api.state(). */
 "use strict";
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -53,7 +53,7 @@ function render(s) {
   if (s.error) {
     $("#video").hidden = true; $("#ph").hidden = false;
     $("#ph-title").textContent = "Caméra indisponible";
-    $("#ph-text").textContent = "Une autre application l'utilise peut-être. Ferme-la puis relance HeadPilot.";
+    $("#ph-text").textContent = "Une autre application l'utilise peut-être. Ferme-la puis relance Tête-à-Clic.";
     $(".ph-icon").innerHTML = icon("camoff");
   } else if (s.videoUrl && !videoSet) {
     $("#video").src = s.videoUrl; $("#video").hidden = false; $("#ph").hidden = true; videoSet = true;

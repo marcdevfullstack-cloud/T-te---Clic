@@ -1,12 +1,12 @@
-"""Tests de la logique de HeadPilot (sans caméra ni souris)."""
+"""Tests de la logique de Tête-à-Clic (sans caméra ni souris)."""
 import random
 import unittest
 
-from headpilot.config import Config
-from headpilot.filters import OneEuroFilter
-from headpilot.gestures import FaceSignals, GestureDetector, GestureSettings
-from headpilot.keyboard_layout import LAYOUTS, UNITS_WIDE, VK_RETURN, hit, place, typed_char
-from headpilot.pointer import DwellClicker, PointerMapper
+from tete_a_clic.config import Config
+from tete_a_clic.filters import OneEuroFilter
+from tete_a_clic.gestures import FaceSignals, GestureDetector, GestureSettings
+from tete_a_clic.keyboard_layout import LAYOUTS, UNITS_WIDE, VK_RETURN, hit, place, typed_char
+from tete_a_clic.pointer import DwellClicker, PointerMapper
 
 OPEN = FaceSignals(blink=0.05, brow=0.1, jaw=0.05)
 CLOSED = FaceSignals(blink=0.9, brow=0.1, jaw=0.05)

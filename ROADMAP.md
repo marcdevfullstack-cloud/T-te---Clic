@@ -1,4 +1,4 @@
-# HeadPilot : feuille de route
+# Tête-à-Clic : feuille de route
 
 *MarcDev@ · mise à jour le 13/11/2026 (v1.1.0)*
 
@@ -33,7 +33,7 @@
 8. **Profils** (plusieurs utilisateurs) et **démarrage automatique** avec Windows.
 9. **Mode lecture** : défilement automatique doux, page suivante par un geste.
 
-### Commun à nos applications (HeadPilot, Posture Coach)
+### Commun à nos applications (Tête-à-Clic, Posture Coach)
 10. **Installateur** et **mise à jour automatique**.
 11. **Version anglaise** : un marché bien plus large.
 12. **Site vitrine** avec démo vidéo et **licences** (plan déjà prêt pour Posture Coach).
