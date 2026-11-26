@@ -33,7 +33,25 @@
 
 **Précision du clic :** quand on cligne ou qu'on lève les sourcils, la tête bouge souvent un peu. Tête-à-Clic clique donc là où était le curseur **juste avant** le geste.
 
-## Démarrage
+## Installation
+
+Lance **`TeteAClic-Setup-<version>.exe`** et suis les étapes. Aucun droit administrateur n'est nécessaire, et l'application s'installe pour l'utilisateur courant.
+
+- Il faut **Windows 10 ou 11 (64 bits)** et une **webcam**.
+- Une icône sur le bureau est proposée, ainsi qu'un démarrage avec Windows (désactivé par défaut).
+- Pour désinstaller : *Paramètres > Applications*. Les réglages restent dans `%LOCALAPPDATA%\TeteAClic`.
+- L'installateur n'est pas encore signé. Windows peut donc afficher « Windows a protégé votre ordinateur » : clique sur **Informations complémentaires**, puis **Exécuter quand même**.
+
+## Fabriquer l'installateur
+
+```powershell
+.venv\Scripts\activate
+.\packaging\build.ps1
+```
+
+Le script lance les tests, génère l'icône et construit l'application avec PyInstaller. Il vérifie ensuite l'exécutable (`--selftest`), puis construit l'installateur avec Inno Setup 6 dans `dist\`. Pour signer, renseigne `CODESIGN_PFX` et `CODESIGN_PASSWORD`.
+
+## Démarrage depuis le code source
 
 ```powershell
 cd head_pilot
@@ -75,7 +93,8 @@ tete_a_clic/
   hotkey.py    raccourci Ctrl+Alt+P
   config.py    réglages enregistrés
   ui/          fenêtre (pywebview), flux vidéo local, interface web
-main.py        point d'entrée
+main.py        point d'entrée (--version, --selftest)
+packaging/     icône, PyInstaller, installateur Inno Setup
 tests/         tests de la logique
 ```
 

@@ -1,0 +1,54 @@
+﻿CONTRAT DE LICENCE UTILISATEUR FINAL — TÊTE-À-CLIC
+© 2026 MarcDev@. Tous droits réservés.
+
+En installant ou en utilisant Tête-à-Clic (le « Logiciel »), vous acceptez les conditions
+ci-dessous. Si vous ne les acceptez pas, n'installez pas le Logiciel.
+
+1. LICENCE
+MarcDev@ vous accorde une licence personnelle, non exclusive et non transférable pour installer
+et utiliser le Logiciel sur les ordinateurs dont vous avez l'usage, y compris pour aider une
+personne dont vous êtes l'aidant. Le Logiciel est concédé sous licence, il n'est pas vendu.
+
+2. RESTRICTIONS
+Sauf autorisation écrite de MarcDev@, vous ne pouvez pas : vendre, louer ou redistribuer le
+Logiciel, le modifier, le décompiler ou le désassembler (sauf dans les limites autorisées par
+la loi), ni retirer les mentions de propriété. Les composants tiers restent soumis à leurs
+propres licences (voir THIRD_PARTY_NOTICES.md).
+
+3. PROPRIÉTÉ
+Le Logiciel, son code, son interface, son nom, son logo et sa documentation sont la propriété
+de MarcDev@ et sont protégés par le droit d'auteur et le droit des marques.
+
+4. DONNÉES PERSONNELLES
+Les images de la webcam sont analysées en direct sur votre ordinateur. Elles ne sont jamais
+enregistrées ni transmises. Le Logiciel n'envoie aucune donnée sur internet. Voir PRIVACY.md.
+
+5. CONTRÔLE DE L'ORDINATEUR
+Le Logiciel déplace la souris, clique et tape du texte à la place de l'utilisateur, d'après
+les mouvements de sa tête et de son visage. Une détection peut se tromper et provoquer un clic
+ou une saisie non voulus. Vérifiez vos actions importantes (paiements, envois, suppressions).
+L'aidant peut à tout moment reprendre la main avec la vraie souris ou le raccourci Ctrl+Alt+P.
+
+6. PAS UN DISPOSITIF MÉDICAL
+Le Logiciel est une aide à l'accessibilité. Il n'est pas un dispositif médical, ne pose aucun
+diagnostic et ne remplace ni un appareil médical ni l'avis d'un professionnel de santé.
+
+7. GARANTIE
+Le Logiciel est fourni « en l'état ». Dans les limites permises par la loi, MarcDev@ exclut
+toute garantie, expresse ou implicite, notamment d'adéquation à un usage particulier et
+d'absence d'erreur.
+
+8. RESPONSABILITÉ
+Dans les limites permises par la loi, la responsabilité de MarcDev@ ne saurait excéder le
+montant payé pour la licence au cours des douze derniers mois. MarcDev@ n'est pas responsable
+des dommages indirects, ni des conséquences d'un clic ou d'une saisie non voulus.
+
+9. RÉSILIATION
+La licence prend fin automatiquement en cas de non-respect du présent contrat. Vous devez
+alors désinstaller le Logiciel.
+
+10. DROIT APPLICABLE
+Le présent contrat est régi par le droit du pays de l'éditeur. À défaut d'accord amiable,
+les tribunaux compétents du siège de l'éditeur seront seuls compétents.
+
+Contact : MarcDev@ — marcdevfullstack@gmail.com
