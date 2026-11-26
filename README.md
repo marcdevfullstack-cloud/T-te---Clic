@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/icon.png" alt="Tête-à-Clic" width="220"></p>
+
 # Tête-à-Clic
 
 *par **MarcDev@** · © 2026 MarcDev@. Tous droits réservés. · Contact : [marcdevfullstack@gmail.com](mailto:marcdevfullstack@gmail.com)*

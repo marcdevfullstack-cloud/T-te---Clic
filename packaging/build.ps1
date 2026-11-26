@@ -19,7 +19,7 @@ $version = (python main.py --version).Split(" ")[-1]
 Invoke-Step "installation de PyInstaller" { python -m pip install --quiet pyinstaller }
 Invoke-Step "tests" { python -m unittest -q }
 Invoke-Step "icône" { python packaging\make_icon.py }
-Invoke-Step "PyInstaller" { pyinstaller --noconfirm --log-level WARN --distpath dist --workpath build packaging\tete_a_clic.spec }
+Invoke-Step "PyInstaller" { pyinstaller --noconfirm --clean --log-level WARN --distpath dist --workpath build packaging\tete_a_clic.spec }
 
 # L'exécutable construit doit charger le modèle d'IA et trouver son interface.
 $test = Start-Process dist\TeteAClic\TeteAClic.exe -ArgumentList "--selftest" -Wait -PassThru
