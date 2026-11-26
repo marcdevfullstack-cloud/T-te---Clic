@@ -2,7 +2,43 @@
 
 *par **MarcDev@** · © 2026 MarcDev@. Tous droits réservés. · Contact : [marcdevfullstack@gmail.com](mailto:marcdevfullstack@gmail.com)*
 
-**Contrôler son ordinateur avec la tête et le regard**, avec une simple webcam. Pour les personnes paralysées, à mobilité réduite, ou temporairement privées de leurs mains. Aucun matériel spécial n'est nécessaire, et tout est traité sur l'ordinateur : aucune image n'est enregistrée ni envoyée.
+**Contrôler son ordinateur avec la tête et le regard**, avec une simple webcam.
+
+**[⬇ Télécharger l'installateur pour Windows](https://github.com/marcdevfullstack-cloud/T-te---Clic/releases/latest)**
+
+## Le projet
+
+### Le problème
+
+Des milliers de personnes ne peuvent pas se servir d'une souris : paralysie, sclérose latérale amyotrophique (maladie de Charcot), myopathie, accident vasculaire cérébral, amputation, ou simplement un bras dans le plâtre. Sans souris, l'ordinateur leur est fermé, et avec lui l'écriture, les études, le travail, les démarches en ligne et les échanges avec leurs proches.
+
+Les solutions existantes coûtent cher (des milliers d'euros pour un appareil de suivi des yeux) ou demandent un matériel spécial. Elles sont souvent en anglais, et compliquées à régler pour un aidant.
+
+### La solution
+
+**Tête-à-Clic transforme la webcam de l'ordinateur en souris et en clavier.** La personne tourne la tête : le curseur suit. Elle cligne longuement des yeux, ou garde la tête immobile un instant : c'est un clic. Elle lève les sourcils : clic droit. Elle ouvre la bouche et incline la tête : la page défile. Un grand clavier français à l'écran lui permet d'écrire dans n'importe quelle application : Word, un navigateur, WhatsApp, un e-mail.
+
+Rien à acheter, rien à brancher : une webcam ordinaire suffit.
+
+### Pour qui
+
+- **Les personnes paralysées ou à mobilité réduite** des membres supérieurs, qui gardent le contrôle de la tête.
+- **Les personnes temporairement privées de leurs mains** : fracture, opération, tendinite.
+- **Les aidants, les familles, les ergothérapeutes et les établissements de santé**, qui cherchent une solution simple à installer et à régler.
+
+### Ce qui le distingue
+
+- **Le clic tombe là où l'on visait.** Quand on cligne des yeux, la tête bouge souvent un peu. Tête-à-Clic s'en souvient et clique là où était le curseur *juste avant* le geste.
+- **Les clignements naturels sont ignorés.** Seul un clignement volontaire, plus long, déclenche un clic.
+- **Un curseur stable sans être lent**, grâce au filtre « One Euro », la référence scientifique en pointage.
+- **Un clavier qui écrit vraiment partout** : il ne prend jamais le focus, et son bandeau indique dans quelle fenêtre le texte va s'écrire.
+- **Pensé pour l'aidant** : il reprend la main en touchant simplement la souris, et Ctrl + Alt + P met tout en pause. Des jauges en direct montrent chaque geste, pour apprendre et régler facilement.
+- **Respect total de la vie privée** : tout est calculé sur l'ordinateur. Aucune image n'est enregistrée, rien n'est envoyé sur internet, aucun compte n'est nécessaire.
+- **En français**, avec une voix qui annonce les actions importantes.
+
+### Où en est le projet
+
+Version **1.1** pour Windows 10 et 11 : pointage, clics, défilement, pause sans les mains et clavier intégré. Les prochaines étapes (prédiction de mots, phrases rapides, bouton d'appel à l'aide, version Android) sont décrites dans la [feuille de route](ROADMAP.md).
 
 ## Comment ça marche
 
